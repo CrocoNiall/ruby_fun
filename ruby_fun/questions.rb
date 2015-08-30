@@ -66,6 +66,8 @@ end
 # turn a positive integer into a negative integer. A negative integer
 # stays negative
 def make_numbers_negative(number)
+  number = number.abs 
+  number = number - (number*2)
   
 end
 
@@ -74,7 +76,9 @@ end
 # even numbers come first
 # so [1, 2, 3, 4, 5, 6] becomes [[2, 4, 6], [1, 3, 5]]
 def separate_array_into_even_and_odd_numbers(array)
-  
+  array1 = [[],[]]
+  array.select { |num| num.even? ? array1[0].push(num) : array1[1].push(num)}
+  array = array1
 end
 
 # count the numbers of elements in an element which are palindromes
@@ -82,7 +86,9 @@ end
 # e.g. 'bob'. So in the array ['bob', 'radar', 'eat'], there
 # are 2 palindromes (bob and radar), so the method should return 2
 def number_of_elements_that_are_palindromes(array)
-  
+  count = 0
+  array.select { |value| value == value.reverse ? count +=1 : count+0}
+  return count 
 end
 
 # return the shortest word in an array
