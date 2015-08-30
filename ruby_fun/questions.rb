@@ -32,7 +32,7 @@ end
 # [['Bob', 'Clive'], ['Bob', 'Dave'], ['Clive', 'Dave']]
 # make sure you don't have the same pairing twice, 
 def every_possible_pairing_of_students(array)
-  
+  array.combination(2)
 end
 
 # discard the first 3 elements of an array, 
@@ -127,8 +127,11 @@ end
 # turn an array into itself repeated twice. So [1, 2, 3]
 # becomes [1, 2, 3, 1, 2, 3]
 def double_array(array)
-  #array.select { |num| array.push(num) }
-  
+  new_array = []
+  new_array = array.map!{ |num| new_array.push(num)}
+  new_array.pop
+
+  return new_array.flatten
 end
 
 # convert a symbol into a string
@@ -148,23 +151,24 @@ end
 # [1, 3, 5, 4, 1, 2, 6, 2, 1, 3, 7]
 # becomes [1, 3, 5, 4, 1, 2]
 def get_elements_until_greater_than_five(array)
-#   x = 0
-#   new_array = []
-#   while true
-#    array.map { |num| new_array.push(num)
-#     if num >= 5
-#       break
-#     end
-#   }
-# end
-#   return new_array
+ x = 0
+ new_array = []
+ array.map { |num|
+  if num <= 5
+  new_array.push(num)
+  elsif num > 5
+    break;       
+  end
+ }
+ return new_array
+
 end
 
 # turn an array (with an even number of elements) into a hash, by
 # pairing up elements. e.g. ['a', 'b', 'c', 'd'] becomes
 # {'a' => 'b', 'c' => 'd'}
 def convert_array_to_a_hash(array)
-  
+  Hash[*array]
 end
 
 # get all the letters used in an array of words and return
@@ -194,7 +198,7 @@ end
 # take out all the capital letters from a string
 # so 'Hello JohnDoe' becomes 'ello ohnoe'
 def remove_capital_letters_from_string(string)
-
+  string.split.map! {|string| string.chomp}
 end
 
 # round up a float up and convert it to an Integer,
@@ -243,13 +247,14 @@ end
 # get the upper limit of a range. e.g. for the range 1..20, you
 # should return 20
 def get_upper_limit_of(range)
-  
+  range.last
 end
 
 # should return true for a 3 dot range like 1...20, false for a 
 # normal 2 dot range
 def is_a_3_dot_range?(range)
-  
+ value = range.include?(20)
+ return !value
 end
 
 # get the square root of a number
@@ -260,7 +265,9 @@ end
 
 # count the number of words in a file
 def word_count_a_file(file_path)
-
+  new_array = []
+  txt_file = File.foreach(file_path).map { |line| line.split(' ') }
+  txt_file.flatten.length
 end
 
 # --- tougher ones ---
