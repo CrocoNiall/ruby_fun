@@ -14,8 +14,6 @@ def remove_nils_from_array(array)
   array.delete_if { |value| value == nil}
 end
 
-
-
 # remove instances of nil AND false from an array
 def remove_nils_and_false_from_array(array)
     array.delete_if { |value| value == nil || value == false}
@@ -24,9 +22,10 @@ end
 # don't reverse the array, but reverse every word inside it. e.g.
 # ['dog', 'monkey'] becomes ['god', 'yeknom']
 def reverse_every_element_in_array(array)
-  array.map { |value| value.reverse}
-  
+  array.map { |value| value.reverse}  
 end
+
+
 
 # given an array of student names, like ['Bob', 'Dave', 'Clive']
 # give every possible pairing - in this case:
@@ -39,25 +38,29 @@ end
 # discard the first 3 elements of an array, 
 # e.g. [1, 2, 3, 4, 5, 6] becomes [4, 5, 6]
 def all_elements_except_first_3(array)
-  
+  array.drop(3)
 end
 
 # add an element to the beginning of an array
 def add_element_to_beginning_of_array(array, element)
-  
+  array.unshift(element)
 end
 
 # sort an array of words by their last letter, e.g.
 # ['sky', 'puma', 'maker'] becomes ['puma', 'maker', 'sky']
 def array_sort_by_last_letter_of_word(array)
-  
+  array.map! { |value| value.reverse}
+  array.sort!
+  array.map! { |value| value.reverse}
 end
 
 # cut strings in half, and return the first half, e.g.
 # 'banana' becomes 'ban'. If the string is an odd number of letters
 # round up - so 'apple' becomes 'app'
 def get_first_half_of_string(string)
-  
+   halfway = (string.length / 2) 
+  string.length.odd? ?  halfway = halfway : halfway = halfway -0.5 
+  string.slice(0..halfway)
 end
 
 # turn a positive integer into a negative integer. A negative integer
