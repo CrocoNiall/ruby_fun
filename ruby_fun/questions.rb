@@ -12,6 +12,7 @@ end
 # remove instances of nil (but NOT false) from an array
 def remove_nils_from_array(array)
   array.delete_if { |value| value == nil}
+  # array.reject { |value| item.is_a(NilClass) }
 end
 
 # remove instances of nil AND false from an array
@@ -68,7 +69,7 @@ end
 def make_numbers_negative(number)
   number = number.abs 
   number = number - (number*2)
-  
+  #-number.abs
 end
 
 # turn an array of numbers into two arrays of numbers, one an array of 
@@ -79,6 +80,8 @@ def separate_array_into_even_and_odd_numbers(array)
   array1 = [[],[]]
   array.select { |num| num.even? ? array1[0].push(num) : array1[1].push(num)}
   array = array1
+
+  # array.partition(&:even?)
 end
 
 # count the numbers of elements in an element which are palindromes
@@ -89,6 +92,8 @@ def number_of_elements_that_are_palindromes(array)
   count = 0
   array.select { |value| value == value.reverse ? count +=1 : count+0}
   return count 
+    # array.select { |item| item == item.reverse }.count
+
 end
 
 # return the shortest word in an array
@@ -102,6 +107,8 @@ def shortest_word_in_array(array)
     end
   }
   return shortest_word
+# array.inject {|memo, word| memo.length < word.length ? memo : word}
+# £array.min_by(:&length)
 end
 
 # return the longest word in an array
@@ -121,6 +128,7 @@ end
 # returns 15
 def total_of_array(array)
   array.inject{|sum,x| sum + x }
+  # array.inject(:+)
   
 end
 
@@ -130,8 +138,9 @@ def double_array(array)
   new_array = []
   new_array = array.map!{ |num| new_array.push(num)}
   new_array.pop
-
   return new_array.flatten
+  # array * 2
+  # array.concat(array)
 end
 
 # convert a symbol into a string
@@ -162,6 +171,7 @@ def get_elements_until_greater_than_five(array)
  }
  return new_array
 
+# array.take_while {|number| number <= 5}
 end
 
 # turn an array (with an even number of elements) into a hash, by
@@ -198,7 +208,8 @@ end
 # take out all the capital letters from a string
 # so 'Hello JohnDoe' becomes 'ello ohnoe'
 def remove_capital_letters_from_string(string)
-  string.split.map! {|string| string.chomp}
+  # string.split.map! {|string| string.chomp}
+  string.gsub(/[A-Z]/, '')
 end
 
 # round up a float up and convert it to an Integer,
@@ -268,6 +279,8 @@ def word_count_a_file(file_path)
   new_array = []
   txt_file = File.foreach(file_path).map { |line| line.split(' ') }
   txt_file.flatten.length
+
+  # IO.read(file_path.split.length)
 end
 
 # --- tougher ones ---
@@ -276,7 +289,7 @@ end
 # called call_method_from_string('foobar')
 # the method foobar should be invoked
 def call_method_from_string(str_method)
-  
+  send :str_method
 end
 
 # return true if the date is a uk bank holiday for 2014
